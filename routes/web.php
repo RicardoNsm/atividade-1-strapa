@@ -6,6 +6,8 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BorrowingController;
 
 Route::resource('categories', CategoryController::class);
 
@@ -22,6 +24,19 @@ Route::get('/books/create-select', [BookController::class, 'createWithSelect'])-
 Route::post('/books/create-select', [BookController::class, 'storeWithSelect'])->name('books.store.select');
 
 Route::resource('books', BookController::class)->except(['create', 'store']);
+
+Route::resource('users', UserController::class)
+    ->except(['create', 'store', 'destroy']);
+
+Route::post('/books/{book}/borrow', [BorrowingController::class, 'store'])
+    ->name('books.borrow');
+
+Route::get('/users/{user}/borrowings', [BorrowingController::class, 'userBorrowings'])
+    ->name('users.borrowings');
+
+Route::patch('/borrowings/{borrowing}/return', [BorrowingController::class, 'returnBook'])
+    ->name('borrowings.return');
+    
 
 Route::get('/', function () {
     return view('welcome');

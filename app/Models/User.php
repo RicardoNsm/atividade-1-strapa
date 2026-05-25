@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Book;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -20,9 +21,9 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'borrowings')
-                    ->withPivot('borrowed_at', 'returned_at')
-                    ->withTimestamps();
+          return $this->belongsToMany(Book::class, 'borrowings')
+        ->withPivot('id', 'borrowed_at', 'returned_at')
+        ->withTimestamps();
     }
 
     /**

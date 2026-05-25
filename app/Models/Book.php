@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Book extends Model
 {
@@ -34,8 +35,8 @@ class Book extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'borrowings')
-            ->withPivot('borrowed_at', 'returned_at')
-            ->withTimestamps();
+         return $this->belongsToMany(User::class, 'borrowings')
+        ->withPivot('id', 'borrowed_at', 'returned_at')
+        ->withTimestamps();
     }
 }
