@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="my-4">Editar Livro</h1>
 
-    <form action="{{ route('books.update', $book) }}" method="POST">
+    <form action="{{ route('books.update', $book) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -64,6 +64,20 @@
                 @endforeach
             </select>
         </div>
+
+        
+        <div class="mb-3">
+    <label class="form-label">
+        Nova Capa
+    </label>
+
+    <input
+        type="file"
+        name="cover_image"
+        class="form-control"
+    >
+    </div>
+
 
         <button class="btn btn-success">
             Atualizar

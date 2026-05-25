@@ -5,6 +5,19 @@
 <div class="container">
     <h1 class="my-4">{{ $book->title }}</h1>
 
+    <div class="mb-4 text-center">
+
+    <img
+        src="{{ $book->cover_image
+            ? asset('storage/' . $book->cover_image)
+            : asset('images/default-cover.png') }}"
+        class="img-fluid rounded"
+        width="250"
+    >
+
+    </div>
+
+
     <div class="card mb-4">
         <div class="card-body">
             <p><strong>Autor:</strong> {{ $book->author->name }}</p>
