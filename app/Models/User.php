@@ -12,10 +12,18 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'borrowings')
+                    ->withPivot('borrowed_at', 'returned_at')
+                    ->withTimestamps();
+    }
 
     /**
      * Get the attributes that should be cast.
